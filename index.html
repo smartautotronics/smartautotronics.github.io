@@ -1469,6 +1469,68 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            /* Mobile fixes for Commutes & Destinations Map to prevent overflow */
+            .location-section {
+                padding: 3rem 0;
+            }
+            .location-container {
+                padding: 0 1rem;
+            }
+            .commutes {
+                flex-wrap: nowrap !important;
+                height: auto !important;
+                min-height: 520px;
+                min-width: 100% !important;
+                width: 100% !important;
+                box-sizing: border-box;
+            }
+            .commutes-map {
+                height: 350px !important;
+                flex: 0 0 350px !important;
+                width: 100% !important;
+            }
+            .commutes-info {
+                flex: 0 0 auto !important;
+                height: auto !important;
+                min-height: auto !important;
+                width: 100% !important;
+                padding: 12px 10px !important;
+                box-sizing: border-box;
+            }
+            .commutes-initial-state {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: auto !important;
+                padding: 14px !important;
+                text-align: center;
+                gap: 12px;
+                box-sizing: border-box;
+            }
+            .commutes-initial-state svg {
+                display: block !important;
+                margin: 0 auto;
+            }
+            .commutes-initial-state .description {
+                padding: 0 !important;
+            }
+            .commutes-initial-state .description .heading {
+                font-size: 17px !important;
+                line-height: 23px !important;
+            }
+            .commutes-initial-state .add-button {
+                width: 100%;
+                justify-content: center;
+                padding: 12px !important;
+                box-sizing: border-box;
+            }
+            .commutes-modal {
+                width: 92vw !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                position: fixed !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1517,26 +1579,29 @@
             color: #ffffff;
             display: flex;
             flex-direction: column;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             font-family: var(--font-primary, Arial, sans-serif);
-            height: 600px;
-            min-height: 420px;
-            min-width: 320px;
+            height: auto;
+            min-height: 550px;
+            min-width: 280px;
             overflow: hidden;
             width: 100%;
             background: rgba(14, 14, 20, 0.95);
             border: 1px solid rgba(255, 0, 0, 0.35);
             border-radius: 16px;
             box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 0, 0, 0.15);
+            box-sizing: border-box;
         }
 
         .commutes-info {
-            flex: 0 0 115px;
+            flex: 0 0 auto;
             max-width: 100%;
+            width: 100%;
             overflow: hidden;
             background: rgba(18, 18, 26, 0.98);
             border-top: 1px solid rgba(255, 0, 0, 0.4);
-            padding: 6px 12px;
+            padding: 10px 12px;
+            box-sizing: border-box;
         }
 
         .commutes-initial-state {
@@ -1544,10 +1609,12 @@
             border: 1px solid rgba(255, 0, 0, 0.45);
             background: rgba(26, 26, 38, 0.85);
             display: flex;
-            height: 98px;
+            height: auto;
+            min-height: 98px;
             margin-top: 4px;
-            padding: 0 16px;
+            padding: 8px 16px;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
+            box-sizing: border-box;
         }
 
         .commutes-initial-state svg {
