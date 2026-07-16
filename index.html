@@ -1905,7 +1905,7 @@
             background-color: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            display: none;
+            display: flex;
             height: 100%;
             justify-content: center;
             left: 0;
@@ -2566,7 +2566,7 @@
                     </div>
                 </main>
 
-                <div class="commutes-modal-container">
+                <div class="commutes-modal-container hide">
                     <div class="commutes-modal" role="dialog" aria-modal="true" aria-labelledby="add-edit-heading">
                         <div class="content">
                             <h2 id="add-edit-heading" class="heading">Add starting point</h2>
@@ -3042,7 +3042,8 @@
             showModal();
             const travelModeEnum = configuration.defaultTravelModeEnum || TravelMode.DRIVING;
             const travelModeId = travelModeEnum.toLowerCase() + '-mode';
-            document.forms['destination-form'][travelModeId].checked = true;
+            const travelModeInput = document.forms['destination-form'][travelModeId] || document.getElementById(travelModeId);
+            if (travelModeInput) travelModeInput.checked = true;
           });
         });
 
@@ -3094,6 +3095,28 @@
         });
 
         destinationModalEl.addButton.addEventListener('click', () => {
+          if (!destinationToAdd && destinationModalEl.destinationInput.value.trim()) {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: destinationModalEl.destinationInput.value.trim() }, (results, status) => {
+              if (status === 'OK' && results && results[0]) {
+                destinationToAdd = {
+                  name: results[0].formatted_address || destinationModalEl.destinationInput.value.trim(),
+                  place_id: results[0].place_id,
+                  geometry: results[0].geometry
+                };
+                const isValid = validateDestinationInput(destinationToAdd);
+                if (!isValid) return;
+                const selectedTravelMode = destinationModalEl.getTravelModeInput().value;
+                addDestinationToList(destinationToAdd, selectedTravelMode);
+                destinationFormReset();
+                hideModal();
+              } else {
+                destinationModalEl.errorMessage.innerHTML = 'Location not found. Please select from the suggestions.';
+                destinationModalEl.destinationInput.classList.add('error');
+              }
+            });
+            return;
+          }
           const isValidInput = validateDestinationInput(destinationToAdd);
           if (!isValidInput) return;
           const selectedTravelMode = destinationModalEl.getTravelModeInput().value;
@@ -3300,7 +3323,8 @@
           hideElement(destinationModalEl.addButton);
           showModal();
           const travelModeId = destination.travelModeEnum.toLowerCase() + '-mode';
-          document.forms['destination-form'][travelModeId].checked = true;
+          const travelModeInput = document.forms['destination-form'][travelModeId] || document.getElementById(travelModeId);
+          if (travelModeInput) travelModeInput.checked = true;
           destinationModalEl.destinationInput.dispatchEvent(new Event('input'));
         });
       }
@@ -3607,15 +3631,23 @@
 
       function showElement(el) {
         if (el) {
-          el.style.display = '';
           el.classList.remove('hide');
+          if (el === commutesEl.modal || el.classList.contains('commutes-modal-container') || el.classList.contains('commutes-modal')) {
+            el.style.display = 'flex';
+          } else {
+            el.style.display = '';
+          }
         }
       }
 
       function hideElement(el) {
         if (el) {
-          el.style.display = 'none';
           el.classList.add('hide');
+          if (el === commutesEl.modal || el.classList.contains('commutes-modal-container') || el.classList.contains('commutes-modal')) {
+            el.style.display = 'none';
+          } else {
+            el.style.display = 'none';
+          }
         }
       }
     }
@@ -3629,15 +3661,9 @@
         distanceMeasurementType: 'METRIC',
         mapOptions: {
           center: { lat: 9.1530, lng: 76.7356 }, // Adoor, Pathanamthitta, Kerala coordinates
-          zoom: 14,
+          zoom: 16.5,
         },
-        initialDestinations: [
-          {
-            name: 'SMART AUTOTRONICS Workshop, Mithrapuram, Adoor',
-            placeId: 'ChIJVVW8rZ2pBzsRc9jL5E63o1s',
-            travelMode: 'DRIVING'
-          }
-        ]
+        initialDestinations: []
       };
       if (typeof google !== 'undefined' && google.maps && google.maps.places) {
         new Commutes(configuration);
