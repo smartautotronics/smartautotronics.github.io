@@ -307,6 +307,42 @@
             display: none; /* Will display when user adds valid image src */
         }
 
+        /* When custom wide logo image is loaded and active in navbar */
+        .brand-logo-container.logo-loaded {
+            width: 320px !important;
+            height: 74px !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+        .brand-logo-container.logo-loaded .brand-logo {
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        @media (max-width: 1024px) {
+            .brand-logo-container.logo-loaded {
+                width: 280px !important;
+                height: 66px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-logo-container.logo-loaded {
+                width: 250px !important;
+                height: 60px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-logo-container.logo-loaded {
+                width: 220px !important;
+                height: 54px !important;
+            }
+        }
+
         .brand-text {
             font-family: var(--font-display);
             font-size: 1.6rem;
@@ -1443,7 +1479,7 @@
     <!-- ==================== ENGINE START OVERLAY ==================== -->
     <div id="engineStartOverlay">
         <div class="overlay-content">
-            <img src="logo.png" alt="SMART AUTOTRONICS Logo" id="overlayLogo" style="max-width: 340px; height: auto; margin: 0 auto 1.2rem; display: none; filter: drop-shadow(0 0 18px rgba(255, 0, 0, 0.45));">
+            <img src="logo.png" alt="SMART AUTOTRONICS Logo" id="overlayLogo" style="width: 100%; max-width: 540px; height: auto; margin: 0 auto 1.6rem; display: none; filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.55));">
             <h1 class="overlay-logo-text" id="overlayLogoText">SMAR<span class="accent-red">T</span> AUTOTRONICS</h1>
             <p class="overlay-subtitle">Advanced Vehicle Meter & ECM Engineering</p>
             
@@ -1926,8 +1962,9 @@
                 const container = brandLogo.closest('.brand-logo-container');
                 const brandText = document.querySelector('.brand-link .brand-text');
                 if (container) {
-                    container.style.width = '220px';
-                    container.style.height = '52px';
+                    container.classList.add('logo-loaded');
+                    container.style.width = '320px';
+                    container.style.height = '74px';
                     container.style.border = 'none';
                     container.style.background = 'transparent';
                     container.style.boxShadow = 'none';
