@@ -1443,7 +1443,8 @@
     <!-- ==================== ENGINE START OVERLAY ==================== -->
     <div id="engineStartOverlay">
         <div class="overlay-content">
-            <h1 class="overlay-logo-text">SMAR<span class="accent-red">T</span> AUTOTRONICS</h1>
+            <img src="logo.png" alt="SMART AUTOTRONICS Logo" id="overlayLogo" style="max-width: 340px; height: auto; margin: 0 auto 1.2rem; display: none; filter: drop-shadow(0 0 18px rgba(255, 0, 0, 0.45));">
+            <h1 class="overlay-logo-text" id="overlayLogoText">SMAR<span class="accent-red">T</span> AUTOTRONICS</h1>
             <p class="overlay-subtitle">Advanced Vehicle Meter & ECM Engineering</p>
             
             <div class="engine-btn-container">
@@ -1472,7 +1473,7 @@
                     <!-- LOGO PLACEHOLDER: Link your uploaded logo here -->
                     <div class="brand-logo-container">
                         <i class="fa-solid fa-gauge-high brand-logo-placeholder-icon"></i>
-                        <img src="logo-placeholder.png" alt="SMART AUTOTRONICS Logo" class="brand-logo" id="brandLogo">
+                        <img src="logo.png" alt="SMART AUTOTRONICS Logo" class="brand-logo" id="brandLogo">
                     </div>
                     <span class="brand-text">SMAR<span class="accent-t">T</span> AUTOTRONICS</span>
                 </a>
@@ -1912,19 +1913,52 @@
                 });
             });
 
-            // Logo Image Placeholder Support:
-            // If user links an image src inside #brandLogo and it loads successfully, hide placeholder icon
+            // Logo Image Support (automatically adapts for wide horizontal logos):
             const brandLogo = document.getElementById('brandLogo');
             const placeholderIcon = document.querySelector('.brand-logo-placeholder-icon');
+            const overlayLogo = document.getElementById('overlayLogo');
+            const overlayLogoText = document.getElementById('overlayLogoText');
+
+            function handleBrandLogoLoad() {
+                brandLogo.style.display = 'block';
+                if (placeholderIcon) placeholderIcon.style.display = 'none';
+                // Because the user logo is wide and contains the full text 'SMART AUTOTRONICS', adapt the navbar cleanly:
+                const container = brandLogo.closest('.brand-logo-container');
+                const brandText = document.querySelector('.brand-link .brand-text');
+                if (container) {
+                    container.style.width = '220px';
+                    container.style.height = '52px';
+                    container.style.border = 'none';
+                    container.style.background = 'transparent';
+                    container.style.boxShadow = 'none';
+                }
+                if (brandText) {
+                    brandText.style.display = 'none';
+                }
+            }
+
             if (brandLogo) {
-                brandLogo.addEventListener('load', () => {
-                    brandLogo.style.display = 'block';
-                    if (placeholderIcon) placeholderIcon.style.display = 'none';
-                });
+                if (brandLogo.complete && brandLogo.naturalHeight !== 0) {
+                    handleBrandLogoLoad();
+                } else {
+                    brandLogo.addEventListener('load', handleBrandLogoLoad);
+                }
                 brandLogo.addEventListener('error', () => {
                     brandLogo.style.display = 'none';
                     if (placeholderIcon) placeholderIcon.style.display = 'block';
                 });
+            }
+
+            if (overlayLogo) {
+                function handleOverlayLogoLoad() {
+                    overlayLogo.style.display = 'block';
+                    if (overlayLogoText) overlayLogoText.style.display = 'none';
+                }
+                if (overlayLogo.complete && overlayLogo.naturalHeight !== 0) {
+                    handleOverlayLogoLoad();
+                } else {
+                    overlayLogo.addEventListener('load', handleOverlayLogoLoad);
+                }
             }
         });
 
