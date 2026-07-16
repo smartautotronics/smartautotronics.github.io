@@ -2707,7 +2707,18 @@
 
     <!-- Embedded JavaScript -->
     <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', () => {
+            const engineStartOverlay = document.getElementById('engineStartOverlay');
+            if (engineStartOverlay && !engineStartOverlay.classList.contains('overlay-hidden')) {
+                window.scrollTo(0, 0);
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
             const startEngineBtn = document.getElementById('startEngineBtn');
             const engineStartOverlay = document.getElementById('engineStartOverlay');
             const mainContent = document.getElementById('mainContent');
@@ -2716,8 +2727,19 @@
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navLinks = document.getElementById('navLinks');
 
+            // Lock body scroll while splash screen is visible
+            if (engineStartOverlay && !engineStartOverlay.classList.contains('overlay-hidden')) {
+                document.body.style.overflow = 'hidden';
+            }
+
             // Handle Engine Start Overlay & Audio Playback
             startEngineBtn.addEventListener('click', () => {
+                // Instantly stick to the very top of the page upon opening from landing overlay
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                document.body.style.overflow = '';
+
                 // Play revving sound
                 if (revAudio) {
                     revAudio.currentTime = 0;
