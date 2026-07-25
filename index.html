@@ -3184,13 +3184,55 @@
                 }
             });
 
-            // Audio Rev Engine Button
+            // Audio Rev Engine Button & Animation
             const playAudioBtn = document.getElementById('playAudioBtn');
             const revAudio = document.getElementById('revAudio');
+            let isRevving = false;
+
             if (playAudioBtn && revAudio) {
                 playAudioBtn.addEventListener('click', () => {
+                    if (isRevving) return; // Prevent spamming
+                    isRevving = true;
+                    
+                    // Disable button visual state temporarily
+                    playAudioBtn.style.opacity = '0.5';
+                    playAudioBtn.style.cursor = 'not-allowed';
+
+                    // Play audio
                     revAudio.currentTime = 0;
                     revAudio.play().catch(err => console.warn('Audio play failed:', err));
+
+                    // Trigger visual RPM surge
+                    const rpmText = document.querySelector('.hud-meter-reading');
+                    if (rpmText) {
+                        let currentRpm = parseInt(rpmText.innerText) || 950;
+                        const targetRpm = 6800;
+                        const surgeStep = 450;
+                        
+                        const surgeInterval = setInterval(() => {
+                            currentRpm += surgeStep;
+                            if (currentRpm >= targetRpm) {
+                                currentRpm = targetRpm;
+                                clearInterval(surgeInterval);
+                                
+                                // Hold briefly, then drop back to idle
+                                setTimeout(() => {
+                                    rpmText.innerHTML = '950<span> RPM</span>';
+                                    isRevving = false;
+                                    playAudioBtn.style.opacity = '';
+                                    playAudioBtn.style.cursor = '';
+                                }, 800);
+                            }
+                            rpmText.innerHTML = currentRpm + '<span> RPM</span>';
+                        }, 40);
+                    } else {
+                        // Fallback if no RPM text is found
+                        setTimeout(() => {
+                            isRevving = false;
+                            playAudioBtn.style.opacity = '';
+                            playAudioBtn.style.cursor = '';
+                        }, 1500);
+                    }
                 });
             }
 
