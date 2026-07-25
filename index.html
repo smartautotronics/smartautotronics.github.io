@@ -2331,6 +2331,78 @@
         .copy-address-btn:hover {
             background: #ff3333;
         }
+
+        .engine-btn-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .engine-pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            border: 2px solid var(--accent-red);
+            animation: pulseRingBtn 2s infinite ease-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .engine-pulse-ring:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulseRingBtn {
+            0% { width: 100%; height: 100%; opacity: 0.8; }
+            100% { width: 140%; height: 160%; opacity: 0; }
+        }
+
+        .btn-engine-whatsapp {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: radial-gradient(circle at 30% 30%, #2a0000 0%, #110000 60%, #000000 100%);
+            border: 2px solid var(--accent-red);
+            box-shadow: 0 0 25px var(--accent-red-glow), inset 0 0 15px rgba(255, 0, 0, 0.4);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 1.1rem 2.4rem;
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all var(--transition-medium);
+            z-index: 5;
+        }
+
+        .btn-engine-whatsapp i {
+            font-size: 1.4rem;
+            color: #25D366; /* WhatsApp Green to make it pop against the red/black */
+            filter: drop-shadow(0 0 8px rgba(37, 211, 102, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .btn-engine-whatsapp:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.8), inset 0 0 30px rgba(255, 0, 0, 0.6);
+            background: radial-gradient(circle at 30% 30%, #3d0000 0%, #1a0000 60%, #000000 100%);
+        }
+
+        .btn-engine-whatsapp:hover i {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .btn-engine-whatsapp:active {
+            transform: scale(0.96);
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -2546,9 +2618,13 @@
                     Visit our high-tech lab in Adoor, Kerala, or securely ship your modules to us from anywhere in India using any trusted courier.
                 </p>
                 <div class="hero-actions">
-                    <a href="https://wa.me/917736284122" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        <i class="fa-brands fa-whatsapp"></i> Contact Us
-                    </a>
+                    <div class="engine-btn-container">
+                        <div class="engine-pulse-ring"></div>
+                        <div class="engine-pulse-ring"></div>
+                        <a href="https://wa.me/917736284122" target="_blank" rel="noopener noreferrer" class="btn-engine-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                        </a>
+                    </div>
                     <a href="#services" class="btn-secondary">
                         <i class="fa-solid fa-screwdriver-wrench"></i> Explore Services
                     </a>
