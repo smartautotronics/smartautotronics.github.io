@@ -2222,6 +2222,117 @@
                 gap: 1.5rem;
             }
         }
+        /* Shipping Modal Styles */
+        .shipping-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .shipping-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .shipping-modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            padding: 2.5rem;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform var(--transition-normal);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .shipping-modal.active .shipping-modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .modal-close-btn:hover {
+            color: var(--accent-red);
+        }
+
+        .packing-checklist {
+            margin: 1.5rem 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .packing-checklist li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .address-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .address-text {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #fff;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .copy-address-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background var(--transition-fast);
+        }
+
+        .copy-address-btn:hover {
+            background: #ff3333;
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -2739,6 +2850,12 @@
                     <h4>Return Delivery</h4>
                     <p>We pack it securely and ship it back to your doorstep anywhere in India with live tracking.</p>
                 </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <button onclick="document.getElementById('shippingModal').classList.add('active')" class="btn-primary" style="font-size: 1rem; padding: 1rem 2rem; cursor: pointer;">
+                    <i class="fa-solid fa-map-location-dot"></i> View Shipping Guide & Address
+                </button>
             </div>
         </section>
 
@@ -3944,5 +4061,59 @@
     window.initCommutesMap = initCommutesMap;
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8TQyXwgAP_4nZAUJo9bY-VJIhsAk--pg&libraries=places&callback=initCommutesMap" async defer></script>
+    <!-- Shipping Modal -->
+    <div class="shipping-modal" id="shippingModal">
+        <div class="shipping-modal-content">
+            <button class="modal-close-btn" onclick="document.getElementById('shippingModal').classList.remove('active')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-box-open" style="color: var(--accent-red);"></i> Packing Checklist & Shipping</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Follow these rules carefully to ensure your module arrives safely.</p>
+            
+            <ul class="packing-checklist">
+                <li><span>⚠️</span> <span><strong>Rule 1:</strong> Disconnect vehicle battery before removing any ECM/ECU module.</span></li>
+                <li><span>📦</span> <span><strong>Rule 2:</strong> Wrap the unit in at least 2 layers of heavy bubble wrap.</span></li>
+                <li><span>📦</span> <span><strong>Rule 3:</strong> Use a rigid, crush-proof cardboard box with foam/paper filling.</span></li>
+                <li><span>📝</span> <span><strong>Rule 4:</strong> Slip a paper note inside with your Name, Phone Number, Vehicle Model, and exact issue description.</span></li>
+            </ul>
+
+            <div class="address-card">
+                <button class="copy-address-btn" onclick="copyAddress(this)">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <p class="address-text" id="shippingAddressText">SMART AUTOTRONICS
+Attn: ECM & Cluster Repair Lab
+Near Maruti Suzuki Service, Mithrapuram,
+Adoor, Pathanamthitta District,
+Kerala - 689501
+Contact: +91 77362 84122</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyAddress(btn) {
+            const address = document.getElementById('shippingAddressText').innerText;
+            navigator.clipboard.writeText(address).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                btn.style.background = '#00ff88';
+                btn.style.color = '#000';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = 'var(--accent-red)';
+                    btn.style.color = '#fff';
+                }, 2000);
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('shippingModal');
+            if (event.target == modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
