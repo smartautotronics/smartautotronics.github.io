@@ -241,14 +241,10 @@
 
         /* ==================== MAIN PAGE CONTAINER ==================== */
         #mainContent {
-            opacity: 0;
+            opacity: 1;
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             z-index: 1;
-        }
-
-        #mainContent.content-visible {
-            opacity: 1;
         }
 
         /* ==================== HEADER & NAVIGATION ==================== */
@@ -2500,35 +2496,6 @@
     <div class="bg-grid"></div>
     <div class="bg-glow-top"></div>
 
-    <!-- AUDIO ELEMENT (Placeholder src exactly as requested) -->
-    <audio id="revAudio" preload="none">
-        <source src="rev-sound.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- ==================== ENGINE START OVERLAY ==================== -->
-    <div id="engineStartOverlay">
-        <div class="overlay-content">
-            <img src="logo.png" alt="SMART AUTOTRONICS Logo" width="1024" height="342" id="overlayLogo" style="width: 100%; max-width: 640px; height: auto; object-fit: contain; margin: 0 auto 1.8rem; display: block; filter: drop-shadow(0 0 28px rgba(255, 0, 0, 0.65));">
-            <h2 class="overlay-logo-text" id="overlayLogoText">SMAR<span class="accent-red">T</span> AUTOTRONICS</h2>
-            <p class="overlay-subtitle">Advanced Vehicle Meter & ECM Engineering</p>
-            
-            <div class="engine-btn-container">
-                <div class="engine-pulse-ring"></div>
-                <div class="engine-pulse-ring"></div>
-                <button id="startEngineBtn" class="start-engine-btn" aria-label="Start Engine and Enter Website">
-                    <i class="fa-solid fa-power-off"></i>
-                    <span>Start Engine</span>
-                </button>
-            </div>
-
-            <div class="start-engine-hint">
-                <i class="fa-solid fa-volume-high"></i>
-                <span>Click to launch high-performance automotive experience</span>
-            </div>
-        </div>
-    </div>
-
     <!-- ==================== MAIN PAGE CONTENT ==================== -->
     <div id="mainContent">
         
@@ -3054,11 +3021,6 @@
             </div>
         </footer>
 
-        <!-- Optional Floating Audio Control (shown once site is launched) -->
-        <button id="soundToggleBtn" aria-label="Replay Engine Sound" title="Replay Engine Sound" style="display: none;">
-            <i class="fa-solid fa-volume-high"></i>
-        </button>
-
     </div>
 
     <!-- Embedded JavaScript -->
@@ -3067,78 +3029,13 @@
             history.scrollRestoration = 'manual';
         }
         window.addEventListener('load', () => {
-            const engineStartOverlay = document.getElementById('engineStartOverlay');
-            if (engineStartOverlay && !engineStartOverlay.classList.contains('overlay-hidden')) {
-                window.scrollTo(0, 0);
-            }
+            window.scrollTo(0, 0);
         });
 
         document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
-            const startEngineBtn = document.getElementById('startEngineBtn');
-            const engineStartOverlay = document.getElementById('engineStartOverlay');
-            const mainContent = document.getElementById('mainContent');
-            const revAudio = document.getElementById('revAudio');
-            const soundToggleBtn = document.getElementById('soundToggleBtn');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navLinks = document.getElementById('navLinks');
-
-            // Lock body scroll while splash screen is visible
-            if (engineStartOverlay && !engineStartOverlay.classList.contains('overlay-hidden')) {
-                document.body.style.overflow = 'hidden';
-            }
-
-            // Handle Engine Start Overlay & Audio Playback
-            startEngineBtn.addEventListener('click', () => {
-                // Instantly stick to the very top of the page upon opening from landing overlay
-                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-                document.body.style.overflow = '';
-
-                // Play revving sound
-                if (revAudio) {
-                    revAudio.currentTime = 0;
-                    revAudio.play().catch(err => {
-                        console.warn("Audio playback issue (or placeholder file not yet replaced):", err);
-                    });
-                }
-
-                // Animate tachometer RPM on start
-                const rpmReading = document.querySelector('.hud-meter-reading');
-                if (rpmReading) {
-                    let currentRpm = 0;
-                    const interval = setInterval(() => {
-                        currentRpm += 450;
-                        if (currentRpm >= 6800) {
-                            currentRpm = 6800;
-                            clearInterval(interval);
-                            setTimeout(() => {
-                                // Settle to idle RPM
-                                rpmReading.innerHTML = '950<span> RPM</span>';
-                            }, 400);
-                        }
-                        rpmReading.innerHTML = currentRpm + '<span> RPM</span>';
-                    }, 40);
-                }
-
-                // Hide overlay and reveal main content with smooth fade
-                engineStartOverlay.classList.add('overlay-hidden');
-                mainContent.classList.add('content-visible');
-                
-                // Show floating sound toggle
-                setTimeout(() => {
-                    soundToggleBtn.style.display = 'flex';
-                }, 1000);
-            });
-
-            // Replay Sound Button
-            soundToggleBtn.addEventListener('click', () => {
-                if (revAudio) {
-                    revAudio.currentTime = 0;
-                    revAudio.play().catch(err => console.warn(err));
-                }
-            });
 
             // Mobile Menu Toggle
             mobileMenuBtn.addEventListener('click', () => {
