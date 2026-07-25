@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECM Repair & Vehicle Meter Specialists in Adoor | Smart Autotronics</title>
-    <meta name="description" content="Leading vehicle meter repair, digital cluster calibration, ECM programming, and smart key coding serving Adoor, Pathanamthitta, Kollam, and Alleppey (Alappuzha). Contact Smart Autotronics for expert diagnostics.">
+    <meta name="description" content="Expert vehicle meter repair, ECM programming, and smart key coding. Visit our Adoor, Kerala workshop or use our secure Pan-India Courier Service for nationwide repairs.">
     <meta property="og:title" content="Smart Autotronics | Vehicle Meter & ECM Repair Specialist in Adoor">
-    <meta property="og:description" content="Specialized ECM repair, speedometer calibration, and key programming for cars and bikes across Adoor, Pathanamthitta, Kollam, and Alleppey.">
+    <meta property="og:description" content="Specialized ECM repair and cluster calibration. Local walk-ins in Adoor, Kerala, and secure Pan-India mail-in services available.">
     <meta property="og:url" content="https://smartautotronics.github.io/">
     <meta property="og:type" content="website">
     
@@ -2161,6 +2161,66 @@
         .hide {
             display: none !important;
         }
+        /* Courier Service Flow CSS */
+        .courier-flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .courier-step {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            transition: transform var(--transition-fast);
+        }
+        .courier-step:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+        }
+        .step-number {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+        .courier-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+        .courier-step p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        @media (max-width: 768px) {
+            .courier-flow-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -2357,8 +2417,11 @@
                 <h1 class="hero-title" style="font-size: clamp(2rem, 4.5vw, 3.8rem);">
                     Smart Autotronics:<br><span class="highlight">ECM Repair & Vehicle Meter</span><br>Specialists in Adoor
                 </h1>
+                <div class="hero-badge" style="background: rgba(255, 0, 0, 0.15); border-color: var(--accent-red); margin-bottom: 1.5rem;">
+                    <i class="fa-solid fa-box-open"></i> Pan-India Courier Service Available
+                </div>
                 <p class="hero-description">
-                    Expert Vehicle Meter Repair & Digital Cluster Calibration in Adoor. Premier ECM Repairing, key programming, and dealership-level car diagnostics serving vehicle owners across Pathanamthitta, Kollam, and Alleppey (Alappuzha) districts.
+                    Visit our high-tech lab in Adoor, Kerala, or securely ship your modules to us from anywhere in India using our Pan-India Courier Service.
                 </p>
                 <div class="hero-actions">
                     <a href="https://wa.me/917736284122" target="_blank" rel="noopener noreferrer" class="btn-primary">
@@ -2552,6 +2615,14 @@
                             <label for="vehicleMake"><i class="fa-solid fa-tag"></i> Vehicle Brand & Model</label>
                             <input type="text" id="vehicleMake" class="form-control" placeholder="e.g. Maruti Swift, Hyundai Creta" required>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="serviceMethod"><i class="fa-solid fa-truck-fast"></i> Service Method</label>
+                            <select id="serviceMethod" class="form-control" required>
+                                <option value="Walk-in (Visit Adoor Workshop)">Walk-in (Visit Adoor Workshop)</option>
+                                <option value="Pan-India Courier (Mail-In Repair)">Pan-India Courier (Mail-In Repair)</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 2rem;">
@@ -2593,6 +2664,38 @@
                     <div class="why-icon"><i class="fa-solid fa-award"></i></div>
                     <h4>Specialist Niches</h4>
                     <p>Focused exclusively on vehicle meters and electronic control units where standard mechanics fall short.</p>
+                </div>
+            </div>
+            
+            <div class="section-header" style="margin-top: 5rem;">
+                <span class="section-tagline">Nationwide Mail-In Service</span>
+                <h3 class="section-title" style="font-size: 2.2rem;">How Our <span>Courier Process</span> Works</h3>
+            </div>
+            
+            <div class="courier-flow-grid">
+                <div class="courier-step">
+                    <div class="step-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="step-number">01</div>
+                    <h4>Pack Safely</h4>
+                    <p>Carefully bubble-wrap your ECM or Vehicle Meter in a secure box.</p>
+                </div>
+                <div class="courier-step">
+                    <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="step-number">02</div>
+                    <h4>Ship To Us</h4>
+                    <p>Send it via any trusted courier service to our Adoor, Kerala headquarters.</p>
+                </div>
+                <div class="courier-step">
+                    <div class="step-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="step-number">03</div>
+                    <h4>Fix & Bench Test</h4>
+                    <p>We receive, diagnose, repair, and run a full load test on our bench simulators.</p>
+                </div>
+                <div class="courier-step">
+                    <div class="step-icon"><i class="fa-solid fa-house-circle-check"></i></div>
+                    <div class="step-number">04</div>
+                    <h4>Return Delivery</h4>
+                    <p>We pack it securely and ship it back to your doorstep anywhere in India with live tracking.</p>
                 </div>
             </div>
         </section>
@@ -2957,9 +3060,11 @@
             const vehicleType = document.getElementById('vehicleType').value;
             const serviceType = document.getElementById('serviceType').value;
             const vehicleMake = document.getElementById('vehicleMake').value;
+            const serviceMethod = document.getElementById('serviceMethod').value;
             const issueNotes = document.getElementById('issueNotes').value;
 
             const message = `*SMART AUTOTRONICS - Online Service Inquiry*%0A%0A` +
+                            `*Service Method:* ${encodeURIComponent(serviceMethod)}%0A` +
                             `*Vehicle Type:* ${encodeURIComponent(vehicleType)}%0A` +
                             `*Brand & Model:* ${encodeURIComponent(vehicleMake)}%0A` +
                             `*Required Service:* ${encodeURIComponent(serviceType)}%0A` +
