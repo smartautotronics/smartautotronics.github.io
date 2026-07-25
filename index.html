@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECM Repair & Vehicle Meter Specialists in Adoor | Smart Autotronics</title>
-    <meta name="description" content="Expert vehicle meter repair, ECM programming, and smart key coding. Visit our Adoor, Kerala workshop or securely mail in your parts from anywhere in India.">
+    <title>Smart Autotronics | ECM Repair & Vehicle Meter Specialists in Kerala</title>
+    <meta name="description" content="Premier ECM repair, vehicle meter calibration, and key programming specialists in Adoor, Kerala. Visit our high-tech lab or use our secure nationwide mail-in repair service.">
     <meta property="og:title" content="Smart Autotronics | Vehicle Meter & ECM Repair Specialist in Adoor">
     <meta property="og:description" content="Specialized ECM repair and cluster calibration. Local walk-ins in Adoor, Kerala, and secure nationwide mail-in services available.">
     <meta property="og:url" content="https://smartautotronics.github.io/">
@@ -787,7 +787,7 @@
 
         /* ==================== SERVICES SECTION ==================== */
         .services-section {
-            padding: 8rem 2rem;
+            padding: clamp(3rem, 5vw, 6rem) 2rem;
             max-width: 1300px;
             margin: 0 auto;
             position: relative;
@@ -964,7 +964,7 @@
 
         /* ==================== INTERACTIVE DIAGNOSTIC LEAD GEN WIDGET ==================== */
         .diagnostic-section {
-            padding: 6rem 2rem;
+            padding: clamp(3rem, 5vw, 6rem) 2rem;
             max-width: 1100px;
             margin: 0 auto 6rem;
             position: relative;
@@ -1091,7 +1091,7 @@
 
         /* ==================== WHY CHOOSE US / ADVANTAGES ==================== */
         .why-section {
-            padding: 6rem 2rem;
+            padding: clamp(3rem, 5vw, 6rem) 2rem;
             max-width: 1300px;
             margin: 0 auto;
             border-top: 1px solid var(--border-glass);
@@ -1564,7 +1564,7 @@
 
         /* ==================== COMMUTES & DESTINATIONS MAP WIDGET STYLES (AUTOMOTIVE RED & DARK THEME) ==================== */
         .location-section {
-            padding: 5rem 0;
+            padding: clamp(3rem, 5vw, 6rem) 0;
             background: rgba(8, 8, 12, 0.7);
             border-top: 1px solid var(--border-glass);
             position: relative;
@@ -2399,6 +2399,58 @@
         .btn-engine-whatsapp:active {
             transform: scale(0.96);
         }
+
+        .map-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity var(--transition-fast);
+        }
+
+        @media (min-width: 1024px) {
+            .map-overlay {
+                display: none;
+            }
+        }
+
+        .audio-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(18, 18, 26, 0.85);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(8px);
+            color: var(--text-primary);
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .audio-btn:hover {
+            background: var(--accent-red-subtle);
+            border-color: var(--accent-red);
+            color: var(--text-primary);
+            box-shadow: 0 0 15px var(--accent-red-glow);
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -2416,39 +2468,20 @@
       "@context": "https://schema.org",
       "@type": "AutoRepair",
       "name": "Smart Autotronics",
-      "image": "https://smartautotronics.github.io/logo.png",
+      "image": "https://smartautotronics.github.io/logo.png", 
+      "@id": "",
       "url": "https://smartautotronics.github.io/",
       "telephone": "+917736284122",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Near Maruti Suzuki Service, Mithrapuram",
-        "addressLocality": "Adoor",
+        "addressLocality": "Adoor, Pathanamthitta",
         "addressRegion": "Kerala",
         "postalCode": "689501",
         "addressCountry": "IN"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 9.1770625,
-        "longitude": 76.7111875
-      },
-      "priceRange": "₹₹",
-      "makesOffer": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "ECM Repairing"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Pan-India Mail-In Vehicle Meter Repair"
-          }
-        }
-      ]
+      "areaServed": ["Adoor", "Pathanamthitta", "Kollam", "Alappuzha", "Kottarakkara", "Pandalam", "India"],
+      "priceRange": "$$"
     }
     </script>
 </head>
@@ -2574,7 +2607,7 @@
                     <!-- LOGO PLACEHOLDER: Link your uploaded logo here -->
                     <div class="brand-logo-container">
                         <i class="fa-solid fa-gauge-high brand-logo-placeholder-icon"></i>
-                        <img src="logo.png" alt="SMART AUTOTRONICS Logo" width="1024" height="342" loading="lazy" class="brand-logo" id="brandLogo">
+                        <img src="./logo.png" alt="SMART AUTOTRONICS Logo" width="1024" height="342" loading="lazy" class="brand-logo" id="brandLogo">
                     </div>
                     <span class="brand-text">SMAR<span class="accent-t">T</span> AUTOTRONICS</span>
                 </a>
@@ -2909,7 +2942,10 @@
             
             <div class="location-container">
                 <main class="commutes">
-                    <div class="commutes-map" aria-label="Map">
+                    <div class="commutes-map" aria-label="Map" style="position: relative;">
+                        <div class="map-overlay" onclick="this.style.pointerEvents='none'; this.style.opacity='0';">
+                            <i class="fa-solid fa-hand-pointer" style="margin-right: 10px;"></i> Tap to interact
+                        </div>
                         <div class="map-view"></div>
                     </div>
 
@@ -3093,6 +3129,14 @@
             </div>
         </footer>
 
+        <!-- Audio element and floating control -->
+        <audio id="revAudio" preload="none">
+            <source src="./rev-sound.mp3" type="audio/mpeg">
+        </audio>
+        <button id="playAudioBtn" class="audio-btn" aria-label="Rev Engine">
+            <i class="fa-solid fa-volume-high"></i> Rev Engine
+        </button>
+
     </div>
 
     <!-- Embedded JavaScript -->
@@ -3139,6 +3183,16 @@
                     icon.classList.add('fa-bars');
                 }
             });
+
+            // Audio Rev Engine Button
+            const playAudioBtn = document.getElementById('playAudioBtn');
+            const revAudio = document.getElementById('revAudio');
+            if (playAudioBtn && revAudio) {
+                playAudioBtn.addEventListener('click', () => {
+                    revAudio.currentTime = 0;
+                    revAudio.play().catch(err => console.warn('Audio play failed:', err));
+                });
+            }
 
             // Close mobile menu when clicking navigation items
             document.querySelectorAll('.nav-item').forEach(item => {
