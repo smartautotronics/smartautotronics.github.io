@@ -3114,6 +3114,17 @@
                             `Please let me know the estimated inspection procedure and booking availability. Thank you!`;
 
             const whatsappUrl = `https://wa.me/917736284122?text=${message}`;
+            
+            // Fire GA4 Lead Generation Event
+            if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', {
+                    'event_category': 'Diagnostic Form',
+                    'event_label': serviceMethod,
+                    'service_type': serviceType,
+                    'vehicle_make': vehicleMake
+                });
+            }
+            
             window.open(whatsappUrl, '_blank');
         }
     </script>
