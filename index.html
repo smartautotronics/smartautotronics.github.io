@@ -279,10 +279,11 @@
         }
 
         /* Custom logo image box in navbar */
-        .brand-logo-container {
-            width: 360px !important;
-            min-width: 360px !important;
-            height: 110px !important;
+        .brand-logo-container,
+        .brand-logo-container.logo-loaded {
+            width: 250px !important;
+            min-width: 250px !important;
+            height: 75px !important;
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
@@ -292,18 +293,11 @@
             flex-shrink: 0 !important;
         }
 
-        .brand-logo-container.logo-loaded {
-            width: 360px !important;
-            min-width: 360px !important;
-            height: 110px !important;
-            flex-shrink: 0 !important;
-        }
-
         .brand-logo {
             position: relative !important;
             width: 100% !important;
-            height: 110px !important;
-            max-height: 110px !important;
+            height: 75px !important;
+            max-height: 75px !important;
             object-fit: contain !important;
             object-position: left center !important;
             display: block !important;
@@ -591,6 +585,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: -4rem;
         }
 
         .hud-cluster {
@@ -1461,6 +1456,7 @@
                 flex-direction: column;
                 gap: 20px;
                 align-items: center;
+                margin-top: 0;
             }
 
             .diagnostic-box {
@@ -3112,6 +3108,24 @@
             window.scrollTo(0, 0);
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navLinks = document.getElementById('navLinks');
+
+            // Auto-Boot Tachometer Animation
+            const rpmReading = document.querySelector('.hud-meter-reading');
+            if (rpmReading) {
+                let currentRpm = 0;
+                const interval = setInterval(() => {
+                    currentRpm += 450;
+                    if (currentRpm >= 6800) {
+                        currentRpm = 6800;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            // Settle to idle RPM
+                            rpmReading.innerHTML = '950<span> RPM</span>';
+                        }, 400);
+                    }
+                    rpmReading.innerHTML = currentRpm + '<span> RPM</span>';
+                }, 40);
+            }
 
             // Mobile Menu Toggle
             mobileMenuBtn.addEventListener('click', () => {
